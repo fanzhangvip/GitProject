@@ -9,6 +9,7 @@
   `git config --list`
 * Git SSH配置\
   `ssh-keygen -t rsa -C "fanzhang@yunnex.com"`
-### 3. git常用命令
+### 3. git使用流程
+![](./image/git1.png) 
 
 
