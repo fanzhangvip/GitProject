@@ -1,4 +1,5 @@
 ### 1. git安装
+* tortoisegit
 ### 2. git配置
 * 用户信息\
   `git config --global user.name "fanzhang"`\
@@ -43,6 +44,7 @@
     //建立本地分支，并切换到对应的分支
     git checkout <分支 >    本地已存在分支切换，主分支 master
     git branch –D  <分支名>  删除本地分支
+
     git push/pull origin <分支名>  推送和拉代码
     git cherry –pick <hashcode>  将另一分支的提交合入到本分支
     ```
@@ -52,6 +54,7 @@
     git log --author=fanzhang 查询指定提交人的日志
     git log --grep=“bugId”
     git log <文件路径>
+    git log --graph
     可组合使用，如
     git log --author=fanzhang  app/src/main/
     git show [hashcode]  [文件路径] 显示具体的修改
@@ -62,6 +65,15 @@
     git blame –l –L 行号   文件名   //查询指定文件某行的提交记录
     git log [--before=“2012-08-09”] [--after=“XXX”]
             [--since=“XX”]
+    git merge 把一个分支或或某个commit的修改合并到现在的分支上
+              [--no-ff ] 禁用fast-farward
+              [--squash] 本地文件内容与不使用该选项的合并结果相同，
+              但是不保留待合并分支上的历史信息，也不提交、不移动HEAD，因此需要一条额外的commit命令
+
+    git stash 可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作
+    git stash list
+    git stash apply恢复，但是恢复后，stash内容并不删除，你需要用git stash drop来删除
+    git stash pop，恢复的同时把stash内容也删了
     ```
 ### 7.冲突解决
 1. 拉代码冲突
@@ -79,3 +91,14 @@
     git cherry-pick 冲突，手动修改
     ```
 ### 8. *最牛逼的技能git status*
+其他学习资料推荐:[廖雪峰的官方网站](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
+
+------
+------
+# Trunk-based development 和 git flow
+[rdc最佳实践之开发模式——git flow](https://yq.aliyun.com/articles/137035)\
+[深入理解学习Git工作流](https://segmentfault.com/a/1190000002918123)
+
+# 最后Markdown语法
+* [Markdown 语法说明](http://www.appinn.com/markdown/)
+* 插件推荐：Markdown Navigator 2.0
