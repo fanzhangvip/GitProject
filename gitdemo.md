@@ -43,6 +43,7 @@
     //建立本地分支，并切换到对应的分支
     git checkout <分支 >    本地已存在分支切换，主分支 master
     git branch –D  <分支名>  删除本地分支
+
     git push/pull origin <分支名>  推送和拉代码
     git cherry –pick <hashcode>  将另一分支的提交合入到本分支
     ```
@@ -52,6 +53,7 @@
     git log --author=fanzhang 查询指定提交人的日志
     git log --grep=“bugId”
     git log <文件路径>
+    git log --graph
     可组合使用，如
     git log --author=fanzhang  app/src/main/
     git show [hashcode]  [文件路径] 显示具体的修改
@@ -79,3 +81,8 @@
     git cherry-pick 冲突，手动修改
     ```
 ### 8. *最牛逼的技能git status*
+------
+------
+# Trunk-based development 和 git flow
+
+
