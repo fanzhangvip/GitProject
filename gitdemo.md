@@ -98,3 +98,6 @@
 [rdc最佳实践之开发模式——git flow](https://yq.aliyun.com/articles/137035)\
 [深入理解学习Git工作流](https://segmentfault.com/a/1190000002918123)
 
+# 最后Markdown语法
+* [Markdown 语法说明](http://www.appinn.com/markdown/)
+* 插件推荐：Markdown Navigator 2.0
