@@ -1,4 +1,5 @@
 ### 1. git安装
+* tortoisegit
 ### 2. git配置
 * 用户信息\
   `git config --global user.name "fanzhang"`\
