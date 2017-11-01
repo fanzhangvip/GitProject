@@ -64,6 +64,15 @@
     git blame –l –L 行号   文件名   //查询指定文件某行的提交记录
     git log [--before=“2012-08-09”] [--after=“XXX”]
             [--since=“XX”]
+    git merge 把一个分支或或某个commit的修改合并到现在的分支上
+              [--no-ff ] 禁用fast-farward
+              [--squash] 本地文件内容与不使用该选项的合并结果相同，
+              但是不保留待合并分支上的历史信息，也不提交、不移动HEAD，因此需要一条额外的commit命令
+
+    git stash 可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作
+    git stash list
+    git stash apply恢复，但是恢复后，stash内容并不删除，你需要用git stash drop来删除
+    git stash pop，恢复的同时把stash内容也删了
     ```
 ### 7.冲突解决
 1. 拉代码冲突
@@ -81,8 +90,11 @@
     git cherry-pick 冲突，手动修改
     ```
 ### 8. *最牛逼的技能git status*
+其他学习资料推荐:[廖雪峰的官方网站](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
+
 ------
 ------
 # Trunk-based development 和 git flow
-
+[rdc最佳实践之开发模式——git flow](https://yq.aliyun.com/articles/137035)\
+[深入理解学习Git工作流](https://segmentfault.com/a/1190000002918123)
 
