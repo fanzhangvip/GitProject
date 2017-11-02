@@ -102,3 +102,46 @@
 # 最后Markdown语法
 * [Markdown 语法说明](http://www.appinn.com/markdown/)
 * 插件推荐：Markdown Navigator 2.0
+
+# git使用常见问题
+1. git无法pull仓库refusing to merge unrelated histories\
+    `git pull origin master --allow-unrelated-histories`
+2. 如果你在add时遇到unable to stat ... Filename too long 这个问题时\
+    `git config --system core.longpaths true`
+3. git 乱码问题
+    ```
+    在cygwin中，使用git add添加要提交的文件的时候，如果文件名是中文，会显示形如274\232\350\256\256\346\200\273\347\273\223.png的乱码。
+    解决方案：
+    在bash提示符下输入：
+
+    git config --global core.quotepath false
+    core.quotepath设为false的话，就不会对0×80以上的字符进行quote。中文显示正常
+
+    设置git gui的界面编码
+
+    git config --global gui.encoding utf-8
+    设置 commit log 提交时使用 utf-8 编码，可避免服务器上乱码，同时与linux上的提交保持一致！
+
+    git config --global i18n.commitencoding utf-8
+    git config --global i18n.logoutputencoding gbk
+    ```
+4. git合并产生备份文件\
+    `git config --global mergetool.keepBackup false`
+5. git 配置比较 合并工具
+    ```
+    # 差异工具配置
+    git config --global diff.external git-diff-wrapper.sh
+    git config --global diff.tool tortoise
+    git config --global difftool.tortoise.cmd 'TortoiseMerge -base:"$LOCAL" -theirs:"$REMOTE"'
+    git config --global difftool.prompt false
+
+    # 合并工具配置
+    git config --global merge.tool tortoise
+    git config --global mergetool.tortoise.cmd 'TortoiseMerge -base:"$BASE" -theirs:"$REMOTE" -mine:"$LOCAL" -merged:"$MERGED"'
+    git config --global mergetool.prompt false
+
+    # 别名设置
+    git config --global alias.dt difftool
+    git config --global alias.mt mergetool
+    ```
+6.

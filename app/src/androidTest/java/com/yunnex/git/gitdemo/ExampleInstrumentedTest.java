@@ -1,3 +1,4 @@
+
 package com.yunnex.git.gitdemo;
 
 import android.content.Context;
@@ -19,9 +20,9 @@ public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() throws Exception {
         // Context of the app under test.
-
          Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.yunnex.git.gitdemo", appContext.getPackageName());
     }
 }
+
