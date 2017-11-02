@@ -143,5 +143,18 @@
     # 别名设置
     git config --global alias.dt difftool
     git config --global alias.mt mergetool
+
+    配置 p4Merge
+    [merge]
+        tool = p4merge
+    [mergetool "p4merge"]
+        cmd = D:/zero/p4/p4merge.exe "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
+        trustExitCode = false
+    [diff]
+        tool = p4merge
+    [difftool]
+        cmd = D:/zero/p4/p4merge.exe "$LOCAL" "$REMOTE"
+    [mergetool]
+        keepBackup = false
     ```
 6.
