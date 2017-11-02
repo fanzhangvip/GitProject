@@ -1,4 +1,5 @@
 ### 1. git安装
+* tortoisegit
 ### 2. git配置
 * 用户信息\
   `git config --global user.name "fanzhang"`\
@@ -64,6 +65,15 @@
     git blame –l –L 行号   文件名   //查询指定文件某行的提交记录
     git log [--before=“2012-08-09”] [--after=“XXX”]
             [--since=“XX”]
+    git merge 把一个分支或或某个commit的修改合并到现在的分支上
+              [--no-ff ] 禁用fast-farward
+              [--squash] 本地文件内容与不使用该选项的合并结果相同，
+              但是不保留待合并分支上的历史信息，也不提交、不移动HEAD，因此需要一条额外的commit命令
+
+    git stash 可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作
+    git stash list
+    git stash apply恢复，但是恢复后，stash内容并不删除，你需要用git stash drop来删除
+    git stash pop，恢复的同时把stash内容也删了
     ```
 ### 7.冲突解决
 1. 拉代码冲突
@@ -81,8 +91,57 @@
     git cherry-pick 冲突，手动修改
     ```
 ### 8. *最牛逼的技能git status*
+其他学习资料推荐:[廖雪峰的官方网站](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
+
 ------
 ------
 # Trunk-based development 和 git flow
+[rdc最佳实践之开发模式——git flow](https://yq.aliyun.com/articles/137035)\
+[深入理解学习Git工作流](https://segmentfault.com/a/1190000002918123)
 
+# 最后Markdown语法
+* [Markdown 语法说明](http://www.appinn.com/markdown/)
+* 插件推荐：Markdown Navigator 2.0
 
+# git使用常见问题
+1. git无法pull仓库refusing to merge unrelated histories\
+    `git pull origin master --allow-unrelated-histories`
+2. 如果你在add时遇到unable to stat ... Filename too long 这个问题时\
+    `git config --system core.longpaths true`
+3. git 乱码问题
+    ```
+    在cygwin中，使用git add添加要提交的文件的时候，如果文件名是中文，会显示形如274\232\350\256\256\346\200\273\347\273\223.png的乱码。
+    解决方案：
+    在bash提示符下输入：
+
+    git config --global core.quotepath false
+    core.quotepath设为false的话，就不会对0×80以上的字符进行quote。中文显示正常
+
+    设置git gui的界面编码
+
+    git config --global gui.encoding utf-8
+    设置 commit log 提交时使用 utf-8 编码，可避免服务器上乱码，同时与linux上的提交保持一致！
+
+    git config --global i18n.commitencoding utf-8
+    git config --global i18n.logoutputencoding gbk
+    ```
+4. git合并产生备份文件\
+    `git config --global mergetool.keepBackup false`
+5. git 配置比较 合并工具
+    ```
+    # 差异工具配置
+    git config --global diff.external git-diff-wrapper.sh
+    git config --global diff.tool tortoise
+    git config --global difftool.tortoise.cmd 'TortoiseMerge -base:"$LOCAL" -theirs:"$REMOTE"'
+    git config --global difftool.prompt false
+
+    # 合并工具配置
+    git config --global merge.tool tortoise
+    git config --global mergetool.tortoise.cmd 'TortoiseMerge -base:"$BASE" -theirs:"$REMOTE" -mine:"$LOCAL" -merged:"$MERGED"'
+    git config --global mergetool.prompt false
+
+    # 别名设置
+    git config --global alias.dt difftool
+    git config --global alias.mt mergetool
+    ```
+6.
