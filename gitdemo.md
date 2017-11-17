@@ -157,4 +157,8 @@
     [mergetool]
         keepBackup = false
     ```
-6.
+6. 删除git在本地的无效远程分支
+```
+    远程已经删除的分支，在本地执行  git  branch  -a 显示还存在，执行以下命令可以清除
+    git remote prune origin
+```
