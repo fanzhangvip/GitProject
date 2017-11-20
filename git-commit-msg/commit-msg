@@ -1,0 +1,209 @@
+#!/usr/bin/env ruby
+#coding=utf-8
+#KCODE = 'u'
+
+# message_file = "E:/reviewCode/GitProject/.git/COMMIT_EDITMSG"
+message_file = ARGV[0]
+
+def getAllType(message)
+  arr = Array.new
+  message.each_line() {
+      |substr|
+    if (substr.index("=type@"))
+      lastIndex = substr.rindex("@")-1
+      typeStr = substr[7..lastIndex]
+      arr.push(typeStr)
+    end
+  }
+  # puts "arr.length=#{arr.length}"
+  return arr
+end
+
+def getAllScope(message)
+  arr = Array.new
+  message.each_line() {
+      |substr|
+    if (substr.index("=scope@"))
+      lastIndex = substr.rindex("@")-1
+      typeStr = substr[8..lastIndex]
+      arr.push(typeStr)
+    end
+  }
+  # puts "arr.length=#{arr.length}"
+  return arr
+end
+
+def getAllFooter(message)
+  arr = Array.new
+  message.each_line() {
+      |substr|
+    if (substr.index("=footer@"))
+      lastIndex = substr.rindex("@")-1
+      typeStr = substr[9..lastIndex]
+      arr.push(typeStr)
+    end
+  }
+  # puts "arr.length=#{arr.length}"
+  return arr
+end
+
+def hasReviews(message)
+  lines = 0
+  message.each_line() {
+      |substr|
+    if (substr.index("Reviewers:"))
+      lines = lines +1
+      # puts "lines= #{lines}"
+      lastIndex = substr.rindex($/)-1
+      reviewers = substr[10..lastIndex]
+      # puts reviewers
+      isEmpty = reviewers.lstrip.empty?
+      # puts isEmpty
+      if (isEmpty)
+        # puts "reviewers is not null"
+        return -1
+      end
+      return lines
+    else
+      lines = lines +1
+    end
+  }
+end
+
+def mymatch(message_file)
+  arr = IO.readlines(message_file)
+  # puts "message_file=#{message_file}"
+  # puts "File.dirname(__FILE__)=#{File.dirname(__FILE__)}"
+  require 'pathname'
+  # puts "Pathname.new(__FILE__).realpath=#{Pathname.new(__FILE__).realpath}"
+  # puts "Pathname.new(File.dirname(__FILE__)).realpath=#{Pathname.new(File.dirname(__FILE__)).realpath}"
+  require 'fileutils'
+  gitPath =File.expand_path("..", File.dirname(__FILE__))
+  # puts "gitPath=#{gitPath}"
+  # gitPath="E:/reviewCode/GitProject/.git"
+  require 'find'
+  require 'fileutils'
+  Find.find(gitPath) do |filename|
+    if (filename =~ /MERGE_MSG$/)
+      puts "filename= #{filename}"
+      return 0
+    end
+	if (filename =~ /rebase-merge$/)
+      puts "filename= #{filename}"
+      return 0
+    end
+  end
+  # puts "arr.lenth: #{arr.length}"
+  if (arr.length < 2)
+    # puts "git commit -m is not"
+    return -1
+  end
+  message = File.read(message_file)
+  allType = getAllType(message)
+  # allType.each {
+  #     |index|
+  #   # puts index
+  # }
+
+  allScope = getAllScope(message)
+  allScope.each {
+      |index|
+    # puts index
+  }
+
+  allFooter = getAllFooter(message)
+  allFooter.each {
+      |index|
+    # puts index
+  }
+
+  # puts "arr[1]=#{arr[1]}"
+  mytype = arr[1][0..arr[1].index("(")-1]
+  # puts mytype
+  if (!allType.include?(mytype))
+    # puts "type is error"
+    return -1
+  end
+  myscope = arr[1][arr[1].index("(")+1..arr[1].index(")")-1]
+  # puts myscope
+  if (!allScope.include?(myscope))
+    # puts "scope is error"
+    return -1
+  end
+  titleLength = arr[1].length
+  # puts titleLength
+  if titleLength > 50
+    # puts "title length is #{titleLength} > 50"
+    return -1
+  end
+
+  isEmpty = arr[2].lstrip.empty?
+  # puts isEmpty
+  if (!isEmpty)
+    # puts "this is not valid format"
+    return -1
+  end
+
+  line = hasReviews(message)
+  if (line == -1)
+    return -1
+  end
+  isEmpty = arr[line-2].lstrip.empty?
+  # puts isEmpty
+  if (!isEmpty)
+    # puts "this is not valid format"
+    return -1
+  end
+  # puts line
+  if (line < 7)
+    # puts "body is not null"
+    return -1
+  end
+  # puts arr[line-1]
+  for i in 4..line-3
+    # puts arr[i]
+    if (arr[i].length > 72)
+      # puts "body:#{i+1} length is #{arr[i].length} > 72"
+      return -1
+    end
+  end
+  isEmpty = arr[line].lstrip.empty?
+  # puts isEmpty
+  if (!isEmpty)
+    # puts "this is not valid format"
+    return -1
+  end
+  if (mytype =~/fix/)
+    # puts mytype
+    # puts arr[line+1]
+    if (arr[line+1].index("bugId:"))
+      lastIndex = arr[line+1].rindex($/)-1
+      bugId = arr[line+1][6..lastIndex]
+      # puts bugId
+      isEmpty = bugId.lstrip.empty?
+      # puts isEmpty
+      if (isEmpty)
+        # puts "bugId is not null"
+        return -1
+      end
+    end
+  end
+  return 0
+end
+
+
+# puts "===================="
+# $result = mymatch(message_file)
+begin
+  $result = mymatch(message_file)
+rescue
+  $result = -1;
+end
+# puts $result
+# $result = -1
+if ($result == -1)
+  puts "[POLICY] Your message is not formatted correctly"
+  exit 1
+end
+# puts "********************"
+
