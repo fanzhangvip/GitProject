@@ -1,9 +1,9 @@
-1.ÇëÔÚ×Ô¼ºµÄÓÃ»§¸ùÄ¿Â¼ÏÂ È»ºó½¨Á¢Ò»¸ö.git_templateµÄÄ¿Â¼
-2.È»ºóÔÚ.git_templateÄ¿Â¼ÏÂ½¨Á¢hooksÄ¿Â¼
-3.È»ºó°Écommit-msg¿½±´µ½hooksÄ¿Â¼ÏÂ
-4.ÔËĞĞÒÔÏÂÃüÁîÅäÖÃºÃ init.templatedir
-git config --global init.templatedir .git_templateÄ¿Â¼µÄÂ·¾¶
+1.è¯·åœ¨è‡ªå·±çš„ç”¨æˆ·æ ¹ç›®å½•ä¸‹ ç„¶åå»ºç«‹ä¸€ä¸ª.git_templateçš„ç›®å½•
+2.ç„¶ååœ¨.git_templateç›®å½•ä¸‹å»ºç«‹hooksç›®å½•
+3.ç„¶åå§commit-msgæ‹·è´åˆ°hooksç›®å½•ä¸‹
+4.è¿è¡Œä»¥ä¸‹å‘½ä»¤é…ç½®å¥½ init.templatedir
+git config --global init.templatedir .git_templateç›®å½•çš„è·¯å¾„
 
-ĞèÒª×¢ÒâµÄÊÇÉÏÊö²Ù×÷»áÈÃÄã½ñºógit cloneµÄÏîÄ¿×Ô¶¯Ó¦ÓÃcommit-msgµÄ¹³×Ó
-µ«Èç¹ûÒÑ¾­cloneÏÂÀ´ÁËµÄÏîÄ¿£¬ĞèÒª´ò¿ªÏîÄ¿µÄ.git/hooksÄ¿Â¼
-È»ºó°Écommit-msg.sampleÉ¾³ı£¬È»ºó°Écommit-msg¿½±´½øÈ¥
+éœ€è¦æ³¨æ„çš„æ˜¯ä¸Šè¿°æ“ä½œä¼šè®©ä½ ä»Šågit cloneçš„é¡¹ç›®è‡ªåŠ¨åº”ç”¨commit-msgçš„é’©å­
+ä½†å¦‚æœå·²ç»cloneä¸‹æ¥äº†çš„é¡¹ç›®ï¼Œéœ€è¦æ‰“å¼€é¡¹ç›®çš„.git/hooksç›®å½•
+ç„¶åå§commit-msg.sampleåˆ é™¤ï¼Œç„¶åå§commit-msgæ‹·è´è¿›å»
